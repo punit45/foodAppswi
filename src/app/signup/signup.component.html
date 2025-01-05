@@ -1,0 +1,37 @@
+
+<div class="fixed inset-0 flex justify-end bg-black bg-opacity-50 z-50">
+    <div class="bg-white p-6 pr-16 rounded-lg shadow-lg w-1/3 max-w-full pl-12">
+        <button class="text-gray-500 text-4xl hover:text-gray-700" (click)="closeSignup()">×</button>
+
+        <div class="flex items-center justify-between">
+            <div class="my-8">
+                <h2 class="text-3xl font-semibold">Sign up</h2>
+                <p class="text-sm">
+                    or <span class="text-sm text-custom-orange font-semibold hover:cursor-pointer" (click)="openLogIn($event)">login to your account</span>
+                </p>
+                <div class="text-2xl">__</div>
+            </div>
+
+            <img src="../../assets/loginpic.avif" alt="" class="w-24 h-24">
+        </div>
+
+        <div *ngIf="signedupFailure" class="text-red-500 text-sm">Signup failed. Try Again</div>
+        <div *ngIf="signedupSuccess" class="text-green-500 text-sm">Sign up Successful</div>
+
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <input type="text" formControlName="phoneNumber" placeholder="Phone number" class="border text-gray-500 pl-8 py-5 w-full">
+            <div *ngIf="signupForm.get('phoneNumber')?.invalid && signupForm.get('phoneNumber')?.touched" class="text-red-500 text-xs">*Invalid Phone Number</div>
+            <br>
+            <input type="text" formControlName="name" placeholder="Name" class="border text-gray-500 pl-8 py-5 w-full">
+            <div *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched" class="text-red-500 text-xs">*Name is required</div>
+            <br>
+            <input type="text" formControlName="email" placeholder="Email" class="border text-gray-500 pl-8 py-5 w-full">
+            <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-red-500 text-xs">*Invalid Email</div>
+            <br>
+            <input type="password" formControlName="password" placeholder="Password" class="border text-gray-500 pl-8 py-5 w-full">
+            <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="text-red-500 text-xs">*Password Length Should be More Than six char </div>
+            <br>
+            <button type="submit" class="bg-custom-orange text-white py-3 px-6 rounded mt-4 hover:bg-opacity-80">Sign up</button>
+        </form>
+    </div>
+</div>
